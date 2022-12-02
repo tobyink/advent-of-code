@@ -32,12 +32,11 @@ pub fn main() {
     sorted.sort_by_key(|i| i.1);
     sorted.reverse();
 
-    println!( "Elf {} has {} calories.", sorted[0].0, sorted[0].1 );
+    println!("Elf {} has {} calories.", sorted[0].0, sorted[0].1);
 
     let mut total: isize = 0;
     for n in 0..=2 {
         total += sorted[n].1;
     }
-    println!( "The top three elves have {} calories total.", total );
+    println!("The top three elves have {} calories total.", total);
 }
-
