@@ -1,7 +1,7 @@
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 
-#[derive(Eq,PartialEq,Debug,Clone,Copy)]
+#[derive(Eq, PartialEq, Debug, Clone, Copy)]
 enum Shape {
     Rock,
     Paper,
@@ -16,7 +16,7 @@ impl Shape {
             Self::Scissors => 3,
         }
     }
-    
+
     pub fn is_beaten_by(&self) -> Self {
         match self {
             Self::Rock => Self::Paper,
@@ -24,7 +24,7 @@ impl Shape {
             Self::Scissors => Self::Rock,
         }
     }
-    
+
     pub fn beats(&self) -> Self {
         match self {
             Self::Paper => Self::Rock,
@@ -34,7 +34,7 @@ impl Shape {
     }
 }
 
-#[derive(Eq,PartialEq,Debug,Clone,Copy)]
+#[derive(Eq, PartialEq, Debug, Clone, Copy)]
 enum Winner {
     First,
     Second,
@@ -45,11 +45,9 @@ impl Winner {
     pub fn pick(first: Shape, second: Shape) -> Self {
         if first.beats() == second {
             Self::First
-        }
-        else if second.beats() == first {
+        } else if second.beats() == first {
             Self::Second
-        }
-        else {
+        } else {
             Self::Draw
         }
     }
@@ -125,6 +123,6 @@ pub fn main() {
         total_score_1 += calc_our_score_1(&m);
         total_score_2 += calc_our_score_2(&m);
     }
-    println!( "Our total score in part 1: {}", total_score_1 );
-    println!( "Our total score in part 2: {}", total_score_2 );
+    println!("Our total score in part 1: {}", total_score_1);
+    println!("Our total score in part 2: {}", total_score_2);
 }
