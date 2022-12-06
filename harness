@@ -49,6 +49,7 @@ sub run_program {
 		js     => "node $executable",
 		php    => "php -f $executable",
 		py     => "python3.10 $executable",
+		rb     => "ruby3.0 $executable",
 	}->{$lang} // "./$executable";
 
 	if ( $cmd ) {

@@ -3,7 +3,7 @@
 [Advent of Code 2022](https://adventofcode.com/2022/) provides 25 coding
 puzzles. I have decided to solve these in a variety of different languages
 including ones I use day-to-day (like Perl 5 and Javascript), ones I'm
-familiar with but get to use less often (like PHP, Python, C, and Java),
+familiar with but get to use less often (like PHP, Python, Ruby, C, and Java),
 and ones I'm still learning (like Rust and Raku).
 
 ## Goals
@@ -14,10 +14,11 @@ and ones I'm still learning (like Rust and Raku).
 - at least 4 days solved in PHP
 - at least 2 days solved in Raku
 - at least 2 days solved in Python
+- at least 2 days solved in Ruby
 - at least 1 day solved in C
 - at least 1 day solved in Java
 
-That's 30 solutions for 25 puzzles, so some days will have multiple solutions.
+That's 32 solutions for 25 puzzles, so some days will have multiple solutions.
 
 ## Solutions
 
@@ -31,9 +32,10 @@ Node | 02 | **             **
 PHP  | 01 |                **
 Raku | 01 |          **
 Py   | 01 |                **
+Ruby | 01 |       **
 C    | 01 |          **
 Java | 00 |
 -----+----+---------------------------------------------------------------------------
-TTTT | 14 | 03 01 01 03 01 05
+TTTT | 15 | 03 01 02 03 01 05
 ======================================================================================
 ```
