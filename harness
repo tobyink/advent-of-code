@@ -1,0 +1,60 @@
+#!/usr/bin/env perl
+
+use strict;
+use warnings;
+use File::chdir;
+
+harness( @ARGV ) unless caller;
+
+sub harness {
+	my ( $day, $lang, $postfix ) = @_;
+	die "Usage: $0 [DAY] [LANG] [POSTFIX?]" unless $day && $lang;
+
+	my $dir   = sprintf( 'day-%d', $day );
+	my $file  = sprintf( 'day%d%s.%s', $day, $postfix ? "-$postfix" : '', $lang );
+	my $filex = sprintf( 'day%d%s.o', $day, $postfix ? "-$postfix" : '' );
+
+	local $CWD = $dir;
+	run_program(
+		run_compiler( $file => $filex, $lang ),
+		$lang,
+	);
+	unlink( $filex ) if -f $filex;
+}
+
+sub run_compiler {
+	my ( $input, $output, $lang ) = @_;
+
+	my $cmd = {
+		rs     => "rustc -o $output $input",
+		c      => "gcc -o $output $input",
+	}->{$lang};
+
+	if ( $cmd ) {
+		print ">>>> $cmd\n";
+		system( $cmd );
+		return $output;
+	}
+	else {
+		return $input;
+	}
+}
+
+sub run_program {
+	my ( $executable, $lang ) = @_;
+
+	my $cmd = {
+		pl     => "perl $executable",
+		raku   => "raku $executable",
+		js     => "node $executable",
+	}->{$lang} // "./$executable";
+
+	if ( $cmd ) {
+		print ">>>> $cmd\n";
+		system( $cmd );
+		return;
+	}
+	else {
+		die "Unknown lang: $lang";
+	}
+}
