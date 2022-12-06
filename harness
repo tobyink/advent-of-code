@@ -47,6 +47,7 @@ sub run_program {
 		pl     => "perl $executable",
 		raku   => "raku $executable",
 		js     => "node $executable",
+		php    => "php -f $executable",
 	}->{$lang} // "./$executable";
 
 	if ( $cmd ) {
