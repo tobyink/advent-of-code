@@ -15,7 +15,7 @@ sub find_marker {
 				'c' x $marker_size,
 				substr( $$buffer, $pos - $marker_size, $marker_size ),
 			);
-		return $pos if keys(%chars) == $marker_size;
+		return $pos if keys( %chars ) == $marker_size;
 	}
 	return;
 }
