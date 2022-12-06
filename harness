@@ -48,6 +48,7 @@ sub run_program {
 		raku   => "raku $executable",
 		js     => "node $executable",
 		php    => "php -f $executable",
+		py     => "python3.10 $executable",
 	}->{$lang} // "./$executable";
 
 	if ( $cmd ) {
