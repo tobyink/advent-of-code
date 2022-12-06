@@ -1,0 +1,9 @@
+*.rs linguist-language=Rust
+*.pl linguist-language=Perl
+*.js linguist-language=Javascript
+*.php linguist-language=PHP
+*.raku linguist-language=Raku
+*.py linguist-language=Python
+*.rb linguist-language=Ruby
+*.c linguist-language=C
+*.java linguist-language=Java
