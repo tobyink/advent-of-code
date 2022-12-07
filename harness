@@ -10,9 +10,13 @@ sub harness {
 	my ( $day, $lang, $postfix ) = @_;
 	die "Usage: $0 [DAY] [LANG] [POSTFIX?]" unless $day && $lang;
 
-	my $dir   = sprintf( 'day-%d', $day );
-	my $file  = sprintf( 'day%d%s.%s', $day, $postfix ? "-$postfix" : '', $lang );
-	my $filex = sprintf( 'day%d%s.o', $day, $postfix ? "-$postfix" : '' );
+	my $dir     = sprintf( 'day-%d', $day );
+	my $file    = sprintf( 'day%d%s.%s', $day, $postfix ? "-$postfix" : '', $lang );
+	my $filex   = sprintf( 'day%d%s.bin', $day, $postfix ? "-$postfix" : '' );
+
+	if ( $lang eq 'java' ) {
+		$filex = sprintf( 'Day%d.class', $day );
+	}
 
 	local $CWD = $dir;
 	run_program(
@@ -20,6 +24,10 @@ sub harness {
 		$lang,
 	);
 	unlink( $filex ) if -f $filex;
+
+	if ( $lang eq 'java' ) {
+		system( "rm Day$day*.class" );
+	}
 }
 
 sub run_compiler {
@@ -28,6 +36,7 @@ sub run_compiler {
 	my $cmd = {
 		rs     => "rustc -o $output $input",
 		c      => "gcc -o $output $input",
+		java   => "javac $input",
 	}->{$lang};
 
 	if ( $cmd ) {
@@ -43,6 +52,9 @@ sub run_compiler {
 sub run_program {
 	my ( $executable, $lang ) = @_;
 
+	my $jclass = $executable;
+	$jclass =~ s/\.class$//;
+
 	my $cmd = {
 		pl     => "perl $executable",
 		raku   => "raku $executable",
@@ -50,6 +62,7 @@ sub run_program {
 		php    => "php -f $executable",
 		py     => "python3.10 $executable",
 		rb     => "ruby3.0 $executable",
+		java   => "java $jclass",
 	}->{$lang} // "./$executable";
 
 	if ( $cmd ) {
