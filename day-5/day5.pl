@@ -1,5 +1,7 @@
 #!/usr/bin/env perl
 
+# vim: filetype=perl
+
 use v5.24;
 use warnings;
 
