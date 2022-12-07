@@ -15,5 +15,5 @@ function find_marker( buffer, marker_size ) {
 		}
 		if ( Object.keys( chars ).length == marker_size ) return pos;
 	}
-	return 0;
+	return false;
 }

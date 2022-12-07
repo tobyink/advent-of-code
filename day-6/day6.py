@@ -7,7 +7,7 @@ def find_marker(buffer, marker_size):
             chars[c] = 1
         if len(chars) == marker_size:
             return pos
-    return 0
+    return -1
 
 input = open("input.txt", "r").read()
 print("Start of packet:  %d" % find_marker(input, 4))

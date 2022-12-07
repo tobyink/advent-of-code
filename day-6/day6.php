@@ -11,7 +11,7 @@ function find_marker ( &$buffer, $marker_size ) {
 		if ( count($chars) == $marker_size )
 			return $pos;
 	}
-	return 0;
+	return FALSE;
 }
 
 $input = file_get_contents( "input.txt" );

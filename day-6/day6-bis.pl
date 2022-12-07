@@ -6,7 +6,7 @@ sub find_marker ( $buffer, $marker_size ) {
 		my %chars = map { substr( $buffer, $pos-$_, 1 ) => 1 } 1 .. $marker_size;
 		return $pos if keys( %chars ) == $marker_size;
 	}
-	return 0;
+	return -1;
 }
 
 my $input = do { ( @ARGV, $/ ) = 'input.txt'; <> };
