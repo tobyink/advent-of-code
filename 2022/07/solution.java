@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class Day7 {
+class Solution {
 
 	private static class DeviceFile {
 		public boolean isRoot = false;

@@ -7,15 +7,15 @@ use File::chdir;
 harness( @ARGV ) unless caller;
 
 sub harness {
-	my ( $day, $lang, $postfix ) = @_;
-	die "Usage: $0 [DAY] [LANG] [POSTFIX?]" unless $day && $lang;
+	my ( $year, $day, $lang, $postfix ) = @_;
+	die "Usage: $0 [YEAR] [DAY] [LANG] [POSTFIX?]" unless $day && $lang;
 
-	my $dir     = sprintf( 'day-%d', $day );
-	my $file    = sprintf( 'day%d%s.%s', $day, $postfix ? "-$postfix" : '', $lang );
-	my $filex   = sprintf( 'day%d%s.bin', $day, $postfix ? "-$postfix" : '' );
+	my $dir     = sprintf( '%s/%02d', $year, $day );
+	my $file    = sprintf( 'solution%s.%s', $postfix ? "-$postfix" : '', $lang );
+	my $filex   = sprintf( 'solution%s.bin', $postfix ? "-$postfix" : '' );
 
 	if ( $lang eq 'java' ) {
-		$filex = sprintf( 'Day%d.class', $day );
+		$filex = 'Solution.class';
 	}
 
 	local $CWD = $dir;
@@ -26,7 +26,7 @@ sub harness {
 	unlink( $filex ) if -f $filex;
 
 	if ( $lang eq 'java' ) {
-		system( "rm Day$day*.class" );
+		system( "rm Solution*.class" );
 	}
 }
 
