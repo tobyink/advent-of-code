@@ -8,15 +8,15 @@ and ones I'm still learning (like Rust and Raku).
 
 ## Goals
 
-- at least 8 days solved in Rust 2021
-- at least 8 days solved in Perl 5
-- at least 4 days solved in Javascript (node)
-- at least 4 days solved in PHP
-- at least 2 days solved in Raku
-- at least 2 days solved in Python
-- at least 2 days solved in Ruby
-- at least 1 day solved in C
-- at least 1 day solved in Java
+- [ ] at least 8 days solved in Rust 2021
+- [ ] at least 8 days solved in Perl 5
+- [ ] at least 4 days solved in Javascript (node)
+- [ ] at least 4 days solved in PHP
+- [x] at least 2 days solved in Raku
+- [ ] at least 2 days solved in Python
+- [ ] at least 2 days solved in Ruby
+- [x] at least 1 day solved in C
+- [x] at least 1 day solved in Java
 
 That's 32 solutions for 25 puzzles, so some days will have multiple solutions.
 
