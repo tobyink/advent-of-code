@@ -8,11 +8,11 @@ harness( @ARGV ) unless caller;
 
 sub harness {
 	my ( $year, $day, $lang, $postfix ) = @_;
-	die "Usage: $0 [YEAR] [DAY] [LANG] [POSTFIX?]" unless $day && $lang;
+	die "Usage: $0 [YEAR] [DAY] [LANG] [POSTFIX?]" unless $year && $day && $lang;
 
-	my $dir     = sprintf( '%s/%02d', $year, $day );
-	my $file    = sprintf( 'solution%s.%s', $postfix ? "-$postfix" : '', $lang );
-	my $filex   = sprintf( 'solution%s.bin', $postfix ? "-$postfix" : '' );
+	my $dir   = sprintf '%s/%02d', $year, $day;
+	my $file  = sprintf 'solution%s.%s', $postfix ? "-$postfix" : '', $lang;
+	my $filex = sprintf 'solution%s.bin', $postfix ? "-$postfix" : '';
 
 	if ( $lang eq 'java' ) {
 		$filex = 'Solution.class';
@@ -35,7 +35,7 @@ sub run_compiler {
 
 	my $cmd = {
 		rs     => "rustc -o $output $input",
-		c      => "gcc  -o $output `pkg-config --cflags glib-2.0` $input `pkg-config --libs glib-2.0`",
+		c      => "gcc -o $output `pkg-config --cflags glib-2.0` $input `pkg-config --libs glib-2.0`",
 		java   => "javac $input",
 	}->{$lang};
 
