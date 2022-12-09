@@ -13,8 +13,8 @@ and ones I'm still learning (like Rust and Raku).
 - [ ] at least 4 days solved in Javascript (node)
 - [ ] at least 4 days solved in PHP
 - [x] at least 2 days solved in Raku
-- [ ] at least 2 days solved in Python
-- [ ] at least 2 days solved in Ruby
+- [x] at least 2 days solved in Python
+- [x] at least 2 days solved in Ruby
 - [x] at least 1 day solved in C
 - [x] at least 1 day solved in Java
 
@@ -31,11 +31,11 @@ Perl |  6 | **    **    ** ** **    **
 Node |  3 | **             **       **
 PHP  |  3 |                ** **    **
 Raku |  2 |          **             **
-Py   |  1 |                **
+Py   |  2 |                **       **
 Ruby |  2 |       **                **
 C    |  2 |          **             **
 Java |  1 |                   **
 -----+----+---------------------------------------------------------------------------
-TTTT | 26 |  3  1  2  3  1  5  3  1  7
+TTTT | 27 |  3  1  2  3  1  5  3  1  8
 ======================================================================================
 ```
