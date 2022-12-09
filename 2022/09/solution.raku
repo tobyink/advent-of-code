@@ -38,7 +38,7 @@ sub main ( $filename, $knot_count = 2 ) {
 		my ( $direction, $move_count ) = split( ' ', $line );
 		for 1 .. $move_count {
 			@knot[0].move( $direction );
-			@knot[$_].follow( @knot[$_-1] ) for 1 .. @knot.elems-1;
+			@knot[$_].follow( @knot[$_-1] ) for 1 .. $knot_count-1;
 		}
 	}
 	say "Tail history: ", @knot[*-1].history-size;
