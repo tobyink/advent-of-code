@@ -30,8 +30,8 @@ class Knot:
 
 def solve ( filename, knot_count ):
 	if knot_count <= 1:
-		raise Exception("knot_count too low")
-	knots = [ Knot(0, 0) for _ in range( knot_count ) ]
+		raise Exception( "knot_count too low" )
+	knots = [ Knot( 0, 0 ) for _ in range( knot_count ) ]
 	for line in open( filename, "r" ).readlines():
 		direction, move_count = line.split( ' ' )
 		for i in range( int( move_count ) ):
