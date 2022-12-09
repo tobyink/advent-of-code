@@ -8,6 +8,7 @@ and ones I'm still learning (like Rust and Raku).
 
 ## Goals
 
+- [ ] solve every day
 - [ ] at least 8 days solved in Rust 2021
 - [ ] at least 8 days solved in Perl 5
 - [ ] at least 4 days solved in Javascript (node)
