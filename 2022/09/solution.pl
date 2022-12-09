@@ -49,7 +49,7 @@ sub main ( $filename, $knot_count = 2 ) {
 	while ( <> ) {
 		chomp;
 		my ( $direction, $move_count ) = split / /;
-		for ( 1 .. $move_count ) {
+		while ( $move_count-->0 ) {
 			$knot[0]->move( $direction );
 			$knot[$_]->follow( $knot[$_ - 1] ) for 1 .. $#knot;
 		}
