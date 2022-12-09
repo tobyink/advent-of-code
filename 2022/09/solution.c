@@ -56,14 +56,10 @@ int Knot_follow ( struct Knot* self, struct Knot* other ) {
 
 int char_to_direction ( char d ) {
 	switch ( d ) {
-		case 'U':
-			return UP;
-		case 'D':
-			return DOWN;
-		case 'L':
-			return LEFT;
-		case 'R':
-			return RIGHT;
+		case 'U': return UP;
+		case 'D': return DOWN;
+		case 'L': return LEFT;
+		case 'R': return RIGHT;
 	}
 	printf( "Unknown character: %c\n", d );
 	exit( EXIT_FAILURE );
