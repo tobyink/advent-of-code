@@ -35,7 +35,7 @@ sub run_compiler {
 
 	my $cmd = {
 		rs     => "rustc -o $output $input",
-		c      => "gcc -o $output $input",
+		c      => "gcc  -o $output `pkg-config --cflags glib-2.0` $input `pkg-config --libs glib-2.0`",
 		java   => "javac $input",
 	}->{$lang};
 
