@@ -100,9 +100,7 @@ impl Map {
                         (row_i32, col_i32 - 1),
                     ]
                     .iter()
-                    .map(|(r, c)| self.lookup_square(*r, *c))
-                    .filter(|maybe| maybe.is_some())
-                    .map(|maybe| maybe.unwrap())
+                    .filter_map(|(r, c)| self.lookup_square(*r, *c))
                     .filter(|n| n.distance.is_some() && n.distance < Some(step))
                     .filter(|n| square.height <= n.height + 1)
                     .collect();
