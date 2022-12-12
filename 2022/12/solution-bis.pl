@@ -1,6 +1,5 @@
 use v5.24;
 use warnings;
-use Data::Dumper;
 
 package Square {
 	use Moo; use experimental qw( signatures );
