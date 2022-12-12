@@ -93,6 +93,10 @@ impl Map {
                         continue 'sq;
                     }
 
+                    // Find neighbours (n) directly up, right, down, and left of square,
+                    // but filter based on whether it exists, has a distance set on a
+                    // previous iteration of the outer loop (not this iteration!), and
+                    // isn't too tall.
                     let neighbours: Vec<&Square> = [
                         (row_i32 - 1, col_i32),
                         (row_i32, col_i32 + 1),
