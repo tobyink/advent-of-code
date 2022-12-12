@@ -85,8 +85,8 @@ impl Map {
             step += 1;
             let mut actions = 0;
             for row in 0..self.grid.len() {
-                'sq: for col in 0..self.grid[row as usize].len() {
-                    let row_i32 = row as i32;
+                let row_i32 = row as i32;
+                'sq: for col in 0..self.grid[row].len() {
                     let col_i32 = col as i32;
                     let square = self.lookup_square(row_i32, col_i32).unwrap();
                     if square.distance.is_some() {
