@@ -1,5 +1,7 @@
 use v5.24;
 use warnings;
+use Time::HiRes ();
+use Term::ANSIScreen ();
 
 package Square {
 	use Moo; use experimental qw( signatures );
@@ -12,9 +14,7 @@ package Square {
 	}
 
 	sub marker ( $self ) {
-		defined( $_->distance )
-			? sprintf( '%s%02d', $_->letter, $_->distance % 100 )
-			: sprintf( '%s--', $_->letter )
+		defined( $_->distance ) ? '##' : '..';
 	}
 
 	my %H = do {
@@ -65,8 +65,16 @@ package Map {
 		return $R->[$col];
 	}
 
-	sub assess ( $self ) {
+	sub assess ( $self, $quiet=0 ) {
 		my $end_point = $self->end_point;
+		if ( $quiet ) {
+			my @found =
+				grep defined,
+				map $_->letter =~ $end_point ? $_->distance : undef,
+				map $_->@*,
+				$self->grid->@*;
+			return wantarray ? ( $found[0], '' ) : $found[0];
+		}
 		my $got = undef;
 		my $str = '';
 		for my $row ( $self->grid->@* ) {
@@ -79,6 +87,7 @@ package Map {
 	}
 
 	sub run_simulation ( $self, $quiet=0 ) {
+		my $start = Time::HiRes::time();
 		my $step = 0;
 		STEP: while () {
 			++$step;
@@ -98,11 +107,9 @@ package Map {
 				}
 			}
 
-			my ( $final, $debug ) = $self->assess();
+			my ( $final, $debug ) = $self->assess( $quiet );
 
 			if ( ! $quiet ) {
-				use Time::HiRes ();
-				use Term::ANSIScreen ();
 				print Term::ANSIScreen::cls();
 				say "Step $step";
 				say $debug;
@@ -110,7 +117,8 @@ package Map {
 			}
 
 			if ( defined $final ) {
-				say $self->description, ": ", $final;
+				my $end = Time::HiRes::time();
+				printf( "%s: %d (%.06f s)\n", $self->description, $final, $end-$start );
 				if ( ! $quiet ) {
 					say "Hit Ctrl+D to continue";
 					my $got = <>;
@@ -126,16 +134,19 @@ package Map {
 	}
 }
 
+$ENV{VISUALIZE}
+	or say "Set the VISUALIZE environment variable for a pretty display.";
+
 Map->load(
 	description => 'Part 1',
 	filename    => 'input.txt',
 	start_point => qr/^S$/,
 	end_point   => qr/^E$/,
-)->run_simulation( 1 );
+)->run_simulation( not $ENV{VISUALIZE} );
 
 Map->load(
 	description => 'Part 2',
 	filename    => 'input.txt',
 	start_point => qr/^[Sa]$/,
 	end_point   => qr/^E$/,
-)->run_simulation( 1 );
+)->run_simulation( not $ENV{VISUALIZE} );
