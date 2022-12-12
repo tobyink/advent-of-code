@@ -86,7 +86,7 @@ package Map {
 		wantarray ? ( $got, $str ) : $got;
 	}
 
-	sub run_simulation ( $self, $quiet=0 ) {
+	sub run_simulation ( $self, $quiet=!$ENV{VISUALIZE} ) {
 		my $start = Time::HiRes::time();
 		my $step = 0;
 		STEP: while () {
@@ -113,7 +113,7 @@ package Map {
 				print Term::ANSIScreen::cls();
 				say "Step $step";
 				say $debug;
-				Time::HiRes::usleep(50_000);
+				Time::HiRes::usleep(20_000);
 			}
 
 			if ( defined $final ) {
@@ -134,7 +134,7 @@ package Map {
 	}
 }
 
-$ENV{VISUALIZE}
+defined( $ENV{VISUALIZE} )
 	or say "Set the VISUALIZE environment variable for a pretty display.";
 
 Map->load(
@@ -142,11 +142,11 @@ Map->load(
 	filename    => 'input.txt',
 	start_point => qr/^S$/,
 	end_point   => qr/^E$/,
-)->run_simulation( not $ENV{VISUALIZE} );
+)->run_simulation();
 
 Map->load(
 	description => 'Part 2',
 	filename    => 'input.txt',
 	start_point => qr/^[Sa]$/,
 	end_point   => qr/^E$/,
-)->run_simulation( not $ENV{VISUALIZE} );
+)->run_simulation();
