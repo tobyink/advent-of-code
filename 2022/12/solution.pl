@@ -14,7 +14,7 @@ package Square {
 	}
 
 	sub marker ( $self ) {
-		defined( $_->distance ) ? '##' : '..';
+		defined( $_->distance ) ? '#' : '.';
 	}
 
 	my %H = do {
