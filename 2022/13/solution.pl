@@ -17,7 +17,7 @@ PART_1: {
 	open my $fh, '<', FILENAME or die;
 	my ( $count, $total ) = ( 0, 0 );
 	while ( ++$count and not eof $fh ) {
-		my ( $a, $b ) = map eval scalar <$fh>, 1..3;
+		my ( $a, $b ) = map eval scalar <$fh>, 1 .. 3;
 		$total += $count unless packet_cmp( $a, $b ) > 0;
 	}
 	say "Index total: $total";
@@ -28,6 +28,6 @@ PART_2: {
 	my @markers = ( [[2]], [[6]] );
 	my @all = sort packet_cmp @markers, map eval, <$fh>;
 	say "Decoder key: ", product grep {
-		$all[$_-1]==$markers[0] or $all[$_-1]==$markers[1]
+		$all[$_-1] == $markers[0] or $all[$_-1] == $markers[1]
 	} 1 .. @all;
 }
