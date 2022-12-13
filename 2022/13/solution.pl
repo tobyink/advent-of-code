@@ -14,7 +14,7 @@ sub my_cmp {
 }
 
 PART_1: {
-	open my $fh, '<', FILENAME;
+	open my $fh, '<', FILENAME or die;
 	my ( $count, $total ) = ( 0, 0 );
 	while ( ++$count and not eof $fh ) {
 		my ( $a, $b ) = map eval scalar <$fh>, 1..3;
@@ -24,7 +24,7 @@ PART_1: {
 }
 
 PART_2: {
-	open my $fh, '<', FILENAME;
+	open my $fh, '<', FILENAME or die;
 	my @markers = ( [[2]], [[6]] );
 	my @all = sort { my_cmp( $b, $a ) } @markers, map eval, <$fh>;
 	say "Decoder key: ", product grep {
