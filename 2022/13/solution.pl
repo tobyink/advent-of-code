@@ -1,45 +1,33 @@
 #!perl
 use v5.16;
-use warnings;
+use List::Util qw( product );
+use constant FILENAME => 'input.txt';
 
 sub my_cmp {
-	my ( $x, $y ) = @_;
-	return $y <=> $x          if ( !ref $x and !ref $y );
-	return my_cmp( [$x], $y ) if ( !ref $x and  ref $y );
-	return my_cmp( $x, [$y] ) if (  ref $x and !ref $y );
-	my $i = 0;
-	while () {
-		return  0 if ( $i > $#$x and $i > $#$y );
-		return  1 if ( $i > $#$x );
-		return -1 if ( $i > $#$y );
-		my $cmp = my_cmp( $x->[$i], $y->[$i] );
-		return $cmp if $cmp;
-		++$i;
+	return $_[1] <=> $_[0] unless grep ref, @_;
+	my ( $ix, $cmp, $a, $b ) = ( -1, 0, map ref ? $_ : [$_], @_ );
+	while ( defined $ix++ ) {
+		return $ix <= $#$b if $ix > $#$a;
+		return -1          if $ix > $#$b;
+		return $cmp        if $cmp = my_cmp( $a->[$ix], $b->[$ix] );
 	}
 }
 
-my $filename = 'input.txt';
-
 PART_1: {
-	my ( $i, $total ) = ( 0, 0 );
-	open( my $fh, '<', $filename );
-	while ( ++$i and not eof $fh ) {
-		my $first  = eval( scalar <$fh> );
-		my $second = eval( scalar <$fh> );
-		my $blank  = scalar <$fh>;
-		$total += $i unless my_cmp( $first, $second ) < 0;
+	open my $fh, '<', FILENAME;
+	my ( $count, $total ) = ( 0, 0 );
+	while ( ++$count and not eof $fh ) {
+		my ( $a, $b ) = map eval ~~<$fh>, 1..3;
+		$total += $count unless my_cmp( $a, $b ) < 0;
 	}
 	say "Index total: $total";
 }
 
 PART_2: {
-	open( my $fh, '<', $filename );
-	my @all = map { chomp; length($_) ? eval($_) : () } <$fh>;
+	local @ARGV = FILENAME;
 	my @markers = ( [[2]], [[6]] );
-	push @all, @markers;
-	my @sorted = sort { my_cmp($b, $a) } @all;
-	my @indices = grep {
-		$sorted[$_-1]==$markers[0] or $sorted[$_-1]==$markers[1]
-	} 1 .. @sorted;
-	say "Decoder key: ", $indices[0] * $indices[1];
+	my @all = sort { my_cmp( $b, $a ) } @markers, map eval, <>;
+	say "Decoder key: ", product grep {
+		$all[$_-1]==$markers[0] or $all[$_-1]==$markers[1]
+	} 1 .. @all;
 }
