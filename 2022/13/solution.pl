@@ -1,7 +1,6 @@
 #!perl
 use v5.16;
 use warnings;
-use JSON::PP qw( encode_json decode_json );
 
 sub my_cmp {
 	my ( $x, $y ) = @_;
@@ -25,8 +24,8 @@ PART_1: {
 	my ( $i, $total ) = ( 0, 0 );
 	open( my $fh, '<', $filename );
 	while ( ++$i and not eof $fh ) {
-		my $first  = decode_json( scalar <$fh> );
-		my $second = decode_json( scalar <$fh> );
+		my $first  = eval( scalar <$fh> );
+		my $second = eval( scalar <$fh> );
 		my $blank  = scalar <$fh>;
 		$total += $i unless my_cmp( $first, $second ) < 0;
 	}
@@ -35,7 +34,7 @@ PART_1: {
 
 PART_2: {
 	open( my $fh, '<', $filename );
-	my @all = map { chomp; length($_) ? decode_json($_) : () } <$fh>;
+	my @all = map { chomp; length($_) ? eval($_) : () } <$fh>;
 	my @markers = ( [[2]], [[6]] );
 	push @all, @markers;
 	my @sorted = sort { my_cmp($b, $a) } @all;
