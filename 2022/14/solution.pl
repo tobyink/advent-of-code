@@ -163,7 +163,7 @@ package Grid {
 				my $col = $_;
 				Square->render( $self->squares->[$col][$row] // 0 );
 			} ( $self->min_col - 1 .. $self->max_col + 1 );
-		} ( $self->min_row - 8 .. $self->max_row + 2 );
+		} ( $self->min_row .. $self->max_row + 2 );
 	}
 
 	signature_for drop_sand => (
@@ -227,6 +227,8 @@ package Grid {
 		return "$name settled at column $col, row $row."
 	}
 }
+
+say Grid->load( filename => FILENAME )->render, "\n\n";
 
 PART_1: {
 	my $g = Grid->load( filename => FILENAME );
