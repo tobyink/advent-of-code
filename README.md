@@ -9,7 +9,7 @@ and ones I'm still learning (like Rust and Raku).
 ## Goals
 
 - [ ] solve every day
-- [ ] at least 8 days solved in Rust 2021
+- [x] at least 8 days solved in Rust 2021
 - [x] at least 8 days solved in Perl 5
 - [ ] at least 4 days solved in Javascript (node)
 - [x] at least 4 days solved in PHP
@@ -27,7 +27,7 @@ That's 32 solutions for 25 puzzles, so some days will have multiple solutions.
 ======================================================================================
 Lang | TT |  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
 -----+----+---------------------------------------------------------------------------
-Rust |  7 | ** **    **    **    ** **       **
+Rust |  8 | ** **    **    **    ** **       **       **
 Perl | 12 | **    **    ** ** **    ** ** ** ** ** ** **
 Node |  3 | **             **       **
 PHP  |  4 |                ** **    **          **
@@ -37,6 +37,6 @@ Ruby |  2 |       **                **
 C    |  2 |          **             **
 Java |  1 |                   **
 -----+----+---------------------------------------------------------------------------
-TTTT | 35 |  3  1  2  3  1  5  3  1  8  1  1  2  2  1  1
+TTTT | 36 |  3  1  2  3  1  5  3  1  8  1  1  2  2  1  2
 ======================================================================================
 ```

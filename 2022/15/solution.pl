@@ -5,17 +5,19 @@ use experimental qw( signatures );
 use List::Util qw( any none );
 use constant {
 
-#	FILENAME            => 'input-test.txt',
-#	PART_ONE_Y          => 10,
-#	PART_ONE_SANE_RANGE => [ -100 .. 100 ],
-#	PART_TWO_LBOUND     => 0,
-#	PART_TWO_UBOUND     => 20,
-
-	FILENAME            => 'input.txt',
-	PART_ONE_Y          => 2_000_000,
-	PART_ONE_SANE_RANGE => [ -2_000_000 .. 6_000_000 ],
+	FILENAME            => 'input-test.txt',
+	PART_ONE_Y          => 10,
+	PART_ONE_LBOUND     => -100,
+	PART_ONE_UBOUND     => 100,
 	PART_TWO_LBOUND     => 0,
-	PART_TWO_UBOUND     => 4_000_000,
+	PART_TWO_UBOUND     => 20,
+
+#	FILENAME            => 'input.txt',
+#	PART_ONE_Y          => 2_000_000,
+#	PART_ONE_LBOUND     => -2_000_000,
+#	PART_ONE_UBOUND     => 6_000_000,
+#	PART_TWO_LBOUND     => 0,
+#	PART_TWO_UBOUND     => 4_000_000,
 };
 
 package Point {
@@ -98,7 +100,7 @@ PART_1: {
 
 	my $y = PART_ONE_Y;
 	my $count;
-	for my $x ( PART_ONE_SANE_RANGE->@* ) {
+	for my $x ( PART_ONE_LBOUND .. PART_ONE_UBOUND ) {
 		my $position = bless { x => $x, y => $y }, 'Point';
 		++$count if any { $_->within_beacon_distance( $position ) } @sensors;
 		--$count if any { $_->is_at( $position ) } @beacons;
