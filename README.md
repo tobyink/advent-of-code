@@ -11,7 +11,7 @@ and ones I'm still learning (like Rust and Raku).
 - [ ] solve every day
 - [x] at least 8 days solved in Rust 2021
 - [x] at least 8 days solved in Perl 5
-- [ ] at least 4 days solved in Javascript (node)
+- [x] at least 4 days solved in Javascript (node)
 - [x] at least 4 days solved in PHP
 - [x] at least 2 days solved in Raku
 - [x] at least 2 days solved in Python
@@ -29,7 +29,7 @@ Lang | TT |  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23
 -----+----+---------------------------------------------------------------------------
 Rust |  8 | ** **    **    **    ** **       **       **
 Perl | 13 | **    **    ** ** **    ** ** ** ** ** ** ** **
-Node |  3 | **             **       **
+Node |  4 | **             **       **                      **
 PHP  |  4 |                ** **    **          **
 Raku |  2 |          **             **
 Py   |  2 |                **       **
@@ -37,6 +37,6 @@ Ruby |  2 |       **                **
 C    |  2 |          **             **
 Java |  1 |                   **
 -----+----+---------------------------------------------------------------------------
-TTTT | 37 |  3  1  2  3  1  5  3  1  8  1  1  2  2  1  2  1
+TTTT | 38 |  3  1  2  3  1  5  3  1  8  1  1  2  2  1  2  1  1
 ======================================================================================
 ```
