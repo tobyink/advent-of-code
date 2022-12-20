@@ -4,21 +4,29 @@ jobs:
   Test:
     runs-on: ubuntu-latest
     steps:
-      - name: Install Ubuntu prereqs
+      - name: Install system prereqs
         run: |
           sudo apt install ruby 
           sudo apt install python3
           sudo apt install php8.1
           sudo apt install rakudo
           sudo apt install default-jdk
-          sudo apt install perl cpanminus
+          sudo apt install perl
           sudo apt install nodejs
           sudo apt install gcc build-essential
           sudo apt install cargo
-      - name: Install Perl prereqs
+      - name: Install cpanm
         run: |
-          sudo cpanm -n Capture::Tiny File::chdir Path::Tiny Term::ANSIColor YAML::XS
+          curl -L https://cpanmin.us | perl - --sudo App::cpanminus
+      - name: Install local::lib
+        run: |
+          cpanm --local-lib=~/perl5 local::lib && eval $(perl -I ~/perl5/lib/perl5/ -Mlocal::lib)
+      - name: Install test harness prereqs
+        run: |
+          cpanm -n Capture::Tiny File::chdir Path::Tiny Term::ANSIColor YAML::XS
       - name: Check out repo
         uses: actions/checkout@v3
-      - name: Run tests
-        run: ./run
+      - name: Run test harness
+        run: |
+          eval $(perl -I ~/perl5/lib/perl5/ -Mlocal::lib)
+          perl ./run
