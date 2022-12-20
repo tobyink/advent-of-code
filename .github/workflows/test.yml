@@ -17,6 +17,8 @@ jobs:
           sudo apt install cargo
       - name: Install Perl prereqs
         run: |
-          sudo cpanm Capture::Tiny File::chdir Path::Tiny Term::ANSIColor YAML::XS
+          sudo cpanm -n Capture::Tiny File::chdir Path::Tiny Term::ANSIColor YAML::XS
+      - name: Check out repo
+        uses: actions/checkout@v3
       - name: Run tests
         run: ./run
