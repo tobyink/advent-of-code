@@ -3,7 +3,7 @@ all: deps run
 
 .PHONY: deps
 deps:
-	cpanm --cpanfile cpanfile --installdeps .
+	cpanm -n --cpanfile cpanfile --installdeps .
 
 .PHONY: clean
 clean:

@@ -1,5 +1,9 @@
 .PHONY: all
-all: run
+all: deps run
+
+.PHONY: deps
+deps:
+	cpanm -n --cpanfile cpanfile --installdeps .
 
 .PHONY: clean
 clean:
