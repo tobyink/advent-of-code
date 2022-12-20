@@ -4,16 +4,19 @@ jobs:
   Test:
     runs-on: ubuntu-latest
     steps:
-      - name: Install prereqs
+      - name: Install Ubuntu prereqs
         run: |
           sudo apt install ruby 
           sudo apt install python3
           sudo apt install php8.1
           sudo apt install rakudo
           sudo apt install default-jdk
-          sudo apt install perl
+          sudo apt install perl cpanminus
           sudo apt install nodejs
           sudo apt install gcc build-essential
           sudo apt install cargo
+      - name: Install Perl prereqs
+        run: |
+          sudo cpanm Capture::Tiny File::chdir Path::Tiny Term::ANSIColor YAML::XS
       - name: Run tests
         run: ./run
