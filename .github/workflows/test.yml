@@ -1,0 +1,19 @@
+name: Test Harness
+on: [push]
+jobs:
+  Test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install prereqs
+        run: |
+          sudo apt install ruby 
+          sudo apt install python3
+          sudo apt install php8.1
+          sudo apt install raku
+          sudo apt install default-jdk
+          sudo apt install perl
+          sudo apt install nodejs
+          sudo apt install gcc build-essential
+          sudo apt install cargo
+      - name: Run tests
+        run: ./run
