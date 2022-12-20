@@ -2,12 +2,13 @@
 
 use v5.16;
 use warnings;
+use constant FILENAME => $ENV{ADVENT_INPUT};
 
 my $i = 0;
 my %priorities = map { $_ => ++$i } 'a'..'z', 'A'..'Z';
 
 PART1: {
-	local @ARGV = 'input.txt';
+	local @ARGV = FILENAME;
 	my $total = 0;
 	while ( <> ) {
 		chomp;
@@ -15,11 +16,11 @@ PART1: {
 		my $re = qr/[^$parts[1]]/;
 		$total += $priorities{ substr( $parts[0] =~ s/$re//gr, 0, 1 ) };
 	}
-	say "Total: $total";
+	say "PART1: $total";
 }
 
 PART2: {
-	local @ARGV = 'input.txt';
+	local @ARGV = FILENAME;
 	my $total = 0;
 	while () {
 		chomp( my $e1 = <> // last );
@@ -34,5 +35,5 @@ PART2: {
 			$total += $priorities{$letter};
 		}
 	}
-	say "Total: $total";
+	say "PART2: $total";
 }
