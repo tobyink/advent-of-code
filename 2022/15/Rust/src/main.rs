@@ -113,9 +113,18 @@ pub fn part1() {
     let sensors = Sensor::list_from_file(FILENAME);
     let beacons = Sensor::extract_beacons(&sensors);
 
-    let y = env::var("ADVENT_PART_ONE_Y").unwrap().parse::<i64>().unwrap();
-    let lbound = env::var("ADVENT_PART_ONE_LBOUND").unwrap().parse::<i64>().unwrap();
-    let ubound = env::var("ADVENT_PART_ONE_UBOUND").unwrap().parse::<i64>().unwrap();
+    let y = env::var("ADVENT_PART_ONE_Y")
+        .unwrap()
+        .parse::<i64>()
+        .unwrap();
+    let lbound = env::var("ADVENT_PART_ONE_LBOUND")
+        .unwrap()
+        .parse::<i64>()
+        .unwrap();
+    let ubound = env::var("ADVENT_PART_ONE_UBOUND")
+        .unwrap()
+        .parse::<i64>()
+        .unwrap();
     let mut count = 0;
     for x in lbound..=ubound {
         let position = Point::new(x, y);
@@ -133,16 +142,18 @@ pub fn part1() {
 pub fn part2() {
     let sensors = Sensor::list_from_file(FILENAME);
 
-    let lbound = env::var("ADVENT_PART_TWO_LBOUND").unwrap().parse::<i64>().unwrap();
-    let ubound = env::var("ADVENT_PART_TWO_UBOUND").unwrap().parse::<i64>().unwrap();
+    let lbound = env::var("ADVENT_PART_TWO_LBOUND")
+        .unwrap()
+        .parse::<i64>()
+        .unwrap();
+    let ubound = env::var("ADVENT_PART_TWO_UBOUND")
+        .unwrap()
+        .parse::<i64>()
+        .unwrap();
 
     for s in &sensors {
         for p in s.border_points() {
-            if p.x < lbound
-                || p.y < lbound
-                || p.x > ubound
-                || p.y > ubound
-            {
+            if p.x < lbound || p.y < lbound || p.x > ubound || p.y > ubound {
                 continue;
             }
             if sensors.iter().any(|s2| s2.within_beacon_distance(&p)) {

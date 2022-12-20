@@ -1,7 +1,7 @@
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 
-static INPUT: &str = "input.txt";
+const INPUT: &str = env!("ADVENT_INPUT");
 static LIMIT: usize = 30;
 
 type Unit = u8;
@@ -139,7 +139,7 @@ pub fn fill_air_pockets(space: &mut Space) {
 pub fn part1() {
     let space = read_space();
     let count = exposed_faces_of_shape(&space);
-    println!("Part 1 faces is: {count}");
+    println!("PART1: {count}");
 }
 
 /// Solve Part 2
@@ -147,7 +147,7 @@ pub fn part2() {
     let mut space = read_space();
     fill_air_pockets(&mut space);
     let count = exposed_faces_of_shape(&space);
-    println!("Part 2 faces is: {count}");
+    println!("PART2: {count}");
 }
 
 /// Solve both parts
