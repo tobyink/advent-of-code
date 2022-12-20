@@ -7,8 +7,8 @@ env:
     ADVENT_INPUT: input.txt
 expect:
   test:
-    PART1: 3
-    PART2: 1623178306
+    PART1: 24
+    PART2: 93
   real:
-    PART1: 2275
-    PART2: 4090409331120
+    PART1: 892
+    PART2: 27155

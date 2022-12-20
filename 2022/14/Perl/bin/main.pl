@@ -4,7 +4,7 @@ use v5.24;
 use utf8;
 use warnings;
 use constant {
-	FILENAME    => 'input-test.txt',
+	FILENAME    => $ENV{ADVENT_INPUT},
 	ENTRANCE    => [ 500, 0 ],
 };
 
@@ -238,10 +238,10 @@ PART_1: {
 		if ( $result->[2] ) {
 			say $g->render;
 			say "Started falling into the void at ", $i;
+			say "PART1: ", $i - 1;
 			last;
 		}
 	}
-	say "Part one answer is that, minus one.";
 	say "";
 }
 
@@ -254,9 +254,9 @@ PART_2: {
 		if ( $result->[0] == ENTRANCE->[0] and $result->[1] == ENTRANCE->[1] ) {
 			say $g->render;
 			say "Entrance blocked at ", $i;
+			say "PART2: ", $i;
 			last;
 		}
 	}
-	say "Part two answer is that.";
 	say "";
 }
