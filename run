@@ -1,0 +1,106 @@
+#!/usr/bin/env perl
+
+use v5.24;
+use warnings;
+use experimental qw( signatures );
+use File::chdir;
+use FindBin qw( $Bin );
+use Path::Tiny;
+use YAML::XS qw( LoadFile );
+use Data::Dumper;
+use Capture::Tiny qw( tee );
+use Term::ANSIColor qw( colored );
+use Memoize;
+
+sub path_to_year ( $year ) {
+	my $path = Path::Tiny::->new( $Bin )->absolute->child( $year );
+	$path->is_dir or die;
+	return $path;
+}
+
+sub path_to_day ( $year, $day ) {
+	my $path = path_to_year( $year )->child( $day );
+	$path->is_dir or die;
+	return $path;
+}
+
+sub path_to_solution ( $year, $day, $solution ) {
+	my $path = path_to_day( $year, $day )->child( $solution );
+	$path->is_dir or die;
+	return $path;
+}
+
+memoize 'get_config';
+sub get_config ( $year, $day ) {
+	return LoadFile( path_to_day( $year, $day )->child( "day.yml" ) );
+}
+
+sub run_solution ( $year, $day, $solution, $env = 'test' ) {
+	my $config = get_config( $year, $day );
+
+	my $name = "$year/$day/$solution ($env)";
+	if ( $config->{solutions}{$solution}{slow} and not $ENV{ADVENT_SLOW} ) {
+		print colored( [ "magenta" ], "$name - skipped (slow)" ), "\n";
+		return;
+	}
+	print colored( [ "bold yellow" ], $name ), "\n";
+
+	my %env = %{ $config->{env}{$env} or die };
+	$env{ADVENT_INPUT} = path_to_day( $year, $day )->child( $env{ADVENT_INPUT} )->absolute;
+	%ENV = ( %ENV, %env );
+
+	my ( $stdout, $stderr ) = tee {
+		local $CWD = path_to_solution( $year, $day, $solution )->stringify;
+		if ( -f 'Makefile' ) {
+			system( qw( make ) );
+			system( qw( make clean ) );
+		}
+		elsif ( -f 'Cargo.toml' ) {
+			system( qw( cargo run ) );
+			system( qw( cargo clean ) );
+		}
+	};
+
+	my $results = { 'NAME' => $name };
+	my %expect = %{ $config->{expect}{$env} or die };
+	for my $key ( sort keys %expect ) {
+		my $look_for = quotemeta( $key . ': ' . $expect{$key} );
+		$results->{$key} = !!( $stdout =~ /$look_for/ );
+	}
+	return $results;
+}
+
+sub run_day ( $year, $day, $env = 'test' ) {
+	my $config = eval { get_config( $year, $day ) }
+		or return;
+	map {
+		run_solution( $year, $day, $_, $env )
+	} sort keys %{ $config->{solutions} or die };
+}
+
+sub run_year ( $year, $env = 'test' ) {
+	my $y = path_to_year( $year );
+	my @days = sort map $_->basename, grep /(\d+)/, $y->children;
+	map { run_day( $year, $_, $env ) } @days;
+}
+
+sub run_all ( $env = 'test' ) {
+	my @results = run_year( '2022', $env );
+	my $fails = 0;
+	for my $result ( @results ) {
+		my $name = delete $result->{NAME};
+		my @keys = sort keys %$result;
+		my $joined = join " ", map {
+			++$fails if !$result->{$_};
+			colored( $result->{$_} ? ["green"] : ["red"], $_ )
+		} @keys;
+		printf(
+			"%-48s  %s\n",
+			colored( [ "bold white" ], "$name:" ),
+			$joined,
+		);
+	}
+	return $fails;
+}
+
+exit( run_all( @ARGV ) );

@@ -1,0 +1,16 @@
+solutions:
+  Javascript:
+  Perl:
+  Rust:
+env:
+  test:
+    ADVENT_INPUT: input-test.txt
+  real:
+    ADVENT_INPUT: input.txt
+expect:
+  test:
+    PART1: 24000
+    PART2: 45000
+  real:
+    PART1: 70374
+    PART2: 204610

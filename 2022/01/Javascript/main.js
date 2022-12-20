@@ -1,6 +1,6 @@
 const fs = require( 'fs' );
 
-fs.readFile( 'input.txt', 'utf8', ( err, data ) => {
+fs.readFile( process.env.ADVENT_INPUT, 'utf8', ( err, data ) => {
 	if ( err ) {
 		console.error( err );
 		return;
@@ -23,12 +23,12 @@ fs.readFile( 'input.txt', 'utf8', ( err, data ) => {
 	var sorted = calories.map( ( c, e ) => [ e, c ] );
 	sorted.sort( ( a, b ) => ( a[1] < b[1] ) ? 1 : ( ( a[1] > b[1] ) ? -1 : 0 ) );
 
-	console.log( `Elf ${sorted[0][0]} has ${sorted[0][1]} calories.` );
+	console.log( `PART1: ${sorted[0][1]}` );
 
 	var total = 0;
 	for ( i in [ 0, 1, 2 ] ) {
 		total += sorted[i][1];
 	}
-	console.log( `The top three elves have ${total} calories total.` );
+	console.log( `PART2: ${total}` );
 
 } );

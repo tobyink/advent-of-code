@@ -2,8 +2,10 @@ use std::fs::File;
 use std::io::{BufRead, BufReader};
 use std::collections::HashMap;
 
+static INPUT: &str = env!("ADVENT_INPUT");
+
 pub fn main() {
-    let file = File::open("input.txt").unwrap();
+    let file = File::open(INPUT).unwrap();
     let io = BufReader::new(file);
 
     let mut total_score_1: usize = 0;
@@ -38,6 +40,6 @@ pub fn main() {
         total_score_2 += strategy2.get(&key[..]).unwrap();
     }
 
-    println!("Our total score in part 1: {}", total_score_1);
-    println!("Our total score in part 2: {}", total_score_2);
+    println!("PART1: {}", total_score_1);
+    println!("PART2: {}", total_score_2);
 }

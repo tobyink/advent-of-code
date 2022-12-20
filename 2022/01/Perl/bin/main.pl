@@ -2,9 +2,10 @@
 
 use v5.14;
 use warnings;
+use constant FILENAME => $ENV{ADVENT_INPUT};
 
 my @calories = do {
-	local @ARGV = 'input.txt';
+	local @ARGV = FILENAME;
 	my ( $i, @data ) = 0;
 	while ( <> ) {
 		chomp;
@@ -18,8 +19,8 @@ my @sorted =
 	map { [ $_, $calories[$_] ] }
 	0 .. $#calories;
 
-printf( "Elf %d has %d calories.\n", $sorted[0][0], $sorted[0][1] );
+say "PART1: ", $sorted[0][1];
 
 my $total = 0;
 $total += $sorted[$_][1] for 0..2;
-printf( "The top three elves have %d calories total.\n", $total );
+say "PART2: ", $total;
