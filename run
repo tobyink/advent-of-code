@@ -3,14 +3,16 @@
 use v5.24;
 use warnings;
 use experimental qw( signatures );
+
+use Capture::Tiny qw( tee );
 use File::chdir;
 use FindBin qw( $Bin );
-use Path::Tiny;
-use YAML::XS qw( LoadFile );
-use Data::Dumper;
-use Capture::Tiny qw( tee );
-use Term::ANSIColor qw( colored );
 use Memoize;
+use Path::Tiny;
+use Term::ANSIColor qw( colored );
+use YAML::XS qw( LoadFile );
+
+use constant DATASET => $ENV{ADVENT_DATASET} || 'test';
 
 sub path_to_year ( $year ) {
 	my $path = Path::Tiny::->new( $Bin )->absolute->child( $year );
@@ -35,7 +37,7 @@ sub get_config ( $year, $day ) {
 	return LoadFile( path_to_day( $year, $day )->child( "day.yml" ) );
 }
 
-sub run_solution ( $year, $day, $solution, $env = 'test' ) {
+sub run_solution ( $year, $day, $solution, $env = DATASET ) {
 	my $config = get_config( $year, $day );
 
 	my $name = "$year/$day/$solution ($env)";
@@ -70,7 +72,7 @@ sub run_solution ( $year, $day, $solution, $env = 'test' ) {
 	return $results;
 }
 
-sub run_day ( $year, $day, $env = 'test' ) {
+sub run_day ( $year, $day, $env = DATASET ) {
 	my $config = eval { get_config( $year, $day ) }
 		or return;
 	map {
@@ -78,14 +80,37 @@ sub run_day ( $year, $day, $env = 'test' ) {
 	} sort keys %{ $config->{solutions} or die };
 }
 
-sub run_year ( $year, $env = 'test' ) {
+sub run_year ( $year, $env = DATASET ) {
 	my $y = path_to_year( $year );
 	my @days = sort map $_->basename, grep /(\d+)/, $y->children;
 	map { run_day( $year, $_, $env ) } @days;
 }
 
-sub run_all ( $env = 'test' ) {
-	my @results = run_year( '2022', $env );
+sub run_all ( $env = DATASET ) {
+	(
+		run_year( '2022', $env ),
+	);
+}
+
+sub run_cli ( @argv ) {
+
+	my ( $YYYY, $DD, $SOLUTION ) = @argv;
+	my @results;
+
+	if ( defined $SOLUTION ) {
+		@results = run_solution( $YYYY, $DD, $SOLUTION );
+	}
+	elsif ( defined $DD ) {
+		@results = run_day( $YYYY, $DD );
+	}
+	elsif ( defined $YYYY ) {
+		@results = run_year( $YYYY );
+	}
+	else {
+		@results = run_all();
+	}
+
+	print "\n";
 	my $fails = 0;
 	for my $result ( @results ) {
 		my $name = delete $result->{NAME};
@@ -100,7 +125,12 @@ sub run_all ( $env = 'test' ) {
 			$joined,
 		);
 	}
+
+	if ( $fails ) {
+		print colored( [ "bold red" ], "Failed $fails tests!" ), "\n";
+	}
+
 	return $fails;
 }
 
-exit( run_all( @ARGV ) );
+exit( run_cli( @ARGV ) ) unless caller;
