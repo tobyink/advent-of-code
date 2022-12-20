@@ -1,5 +1,7 @@
 # Advent of Code 2022
 
+[![AoC 2022](https://github.com/tobyink/advent-of-code/actions/workflows/aoc2022.yml/badge.svg)](https://github.com/tobyink/advent-of-code/actions/workflows/aoc2022.yml)
+
 [Advent of Code 2022](https://adventofcode.com/2022/) provides 25 coding
 puzzles. I have decided to solve these in a variety of different languages
 including ones I use day-to-day (like Perl 5 and Javascript), ones I'm
