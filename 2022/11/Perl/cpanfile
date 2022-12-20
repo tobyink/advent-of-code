@@ -1,0 +1,5 @@
+requires 'Moo' => '2.000000';
+requires 'namespace::clean';
+requires 'Import::Into';
+requires 'Sub::HandlesVia';
+requires 'Types::Common';
