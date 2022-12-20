@@ -4,7 +4,7 @@ use warnings;
 package Local::StackList;
 use Moo;
 use Sub::HandlesVia;
-use Types::Common -types, -lexical, -sigs;
+use Types::Common -types, -sigs;
 
 use Local::Crate;
 use Local::Stack;

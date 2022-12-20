@@ -4,7 +4,7 @@ use warnings;
 package Local::Crate;
 use Moo;
 use Sub::HandlesVia;
-use Types::Common -types, -lexical;
+use Types::Common -types;
 
 has letter => (
 	is => 'ro',

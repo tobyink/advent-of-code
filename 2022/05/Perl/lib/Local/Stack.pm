@@ -4,7 +4,7 @@ use warnings;
 package Local::Stack;
 use Moo;
 use Sub::HandlesVia;
-use Types::Common -types, -lexical;
+use Types::Common -types;
 
 has number => (
 	is => 'ro',
