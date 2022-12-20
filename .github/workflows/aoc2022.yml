@@ -1,7 +1,7 @@
-name: Test Harness
+name: AoC 2022
 on: [push]
 jobs:
-  Test:
+  Test Harness:
     runs-on: ubuntu-latest
     steps:
       - name: Install system prereqs
@@ -30,4 +30,4 @@ jobs:
       - name: Run test harness
         run: |
           eval $(perl -I ~/perl5/lib/perl5/ -Mlocal::lib)
-          perl ./run
+          perl ./run 2022
