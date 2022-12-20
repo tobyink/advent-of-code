@@ -30,7 +30,7 @@ class Knot {
 	}
 }
 
-sub main ( $filename, $knot_count = 2 ) {
+sub main ( $filename, $knot_count = 2, $desc = 'ANSWER' ) {
 	$knot_count > 1 or die;
 	my @knot = ( 1 .. $knot_count ).map( { Knot.new( row => 0, col => 0 ) } );
 	my $fh = open $filename, :r;
@@ -41,8 +41,8 @@ sub main ( $filename, $knot_count = 2 ) {
 			@knot[$_].follow( @knot[$_-1] ) for 1 .. $knot_count-1;
 		}
 	}
-	say "Tail history: ", @knot[*-1].history-size;
+	say "$desc: ", @knot[*-1].history-size;
 }
 
-main( "input.txt" );
-main( "input.txt", 10 );
+main( %*ENV{'ADVENT_INPUT'},  2, 'PART1' );
+main( %*ENV{'ADVENT_INPUT'}, 10, 'PART2' );

@@ -52,7 +52,7 @@ function range ( start, stop, step ) {
 	return a;
 }
 
-function main ( filename, knot_count ) {
+function main ( filename, knot_count, desc ) {
 	if ( knot_count < 2 ) {
 		console.error( "knot_count too low" );
 		return;
@@ -79,9 +79,9 @@ function main ( filename, knot_count ) {
 				}
 			}
 		} );
-		console.log( `Tail history: ${ knots[knot_count - 1].history_size }` );
+		console.log( `${desc}: ${ knots[knot_count - 1].history_size }` );
 	} );
 }
 
-main( "input.txt", 2 );
-main( "input.txt", 10 );
+main( process.env.ADVENT_INPUT, 2, "PART1" );
+main( process.env.ADVENT_INPUT, 10, "PART2" );

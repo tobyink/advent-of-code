@@ -2,6 +2,8 @@ use std::collections::HashMap;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 
+static INPUT: &str = env!("ADVENT_INPUT");
+
 type MoveHistory = HashMap<(i32, i32), usize>;
 
 #[derive(Clone)]
@@ -65,7 +67,7 @@ impl Knot {
     }
 }
 
-pub fn solve(filename: &str, knot_count: usize) {
+pub fn solve(filename: &str, knot_count: usize, desc: &str) {
     if knot_count < 1 {
         panic!("knot_count too low");
     }
@@ -86,10 +88,10 @@ pub fn solve(filename: &str, knot_count: usize) {
             }
         }
     }
-    println!("Tail history: {}", knots[knot_count - 1].history_size());
+    println!("{}: {}", desc, knots[knot_count - 1].history_size());
 }
 
 pub fn main() {
-    solve("input.txt", 2);
-    solve("input.txt", 10);
+    solve(INPUT, 2, "PART1");
+    solve(INPUT, 10, "PART2");
 }

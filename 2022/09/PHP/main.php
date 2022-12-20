@@ -44,7 +44,7 @@ class Knot {
 	}
 }
 
-function main ( $filename, $knot_count = 2 ) {
+function main ( $filename, $knot_count = 2, $desc = "ANSWER" ) {
 	$knot_count > 1 or die();
 	for ( $k = 0; $k < $knot_count; ++$k ) {
 		$knots[] = new Knot( 0, 0 );
@@ -62,8 +62,8 @@ function main ( $filename, $knot_count = 2 ) {
 			}
 		}
 	}
-	echo 'Tail history: ' . $knots[$knot_count-1]->history_size() . "\n";
+	echo "$desc: " . $knots[$knot_count-1]->history_size() . "\n";
 }
 
-main( "input.txt" );
-main( "input.txt", 10 );
+main( getenv('ADVENT_INPUT'), 2, "PART1" );
+main( getenv('ADVENT_INPUT'), 10, "PART2" );

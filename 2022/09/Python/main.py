@@ -1,5 +1,7 @@
 #!/usr/bin/python3.10
 
+import os
+
 class Knot:
 	def __init__ ( self, row, col ):
 		self.row, self.col, self.history = row, col, {}
@@ -28,7 +30,7 @@ class Knot:
 		if self.col < other.col: direction += 'R'
 		self.move( direction )
 
-def solve ( filename, knot_count ):
+def solve ( filename, knot_count, desc ):
 	if knot_count <= 1:
 		raise Exception( "knot_count too low" )
 	knots = [ Knot( 0, 0 ) for _ in range( knot_count ) ]
@@ -38,7 +40,7 @@ def solve ( filename, knot_count ):
 			knots[0].move( direction )
 			for ix in range( 1, knot_count ):
 				knots[ix].follow( knots[ix-1] );
-	print( "Tail history: %d" % knots[knot_count-1].history_size() )
+	print( "%s: %d" % ( desc, knots[knot_count-1].history_size() ) )
 
-solve( "input.txt", 2 );
-solve( "input.txt", 10 );
+solve( os.getenv( 'ADVENT_INPUT' ),  2, 'PART1' );
+solve( os.getenv( 'ADVENT_INPUT' ), 10, 'PART2' );

@@ -65,7 +65,7 @@ int char_to_direction ( char d ) {
 	exit( EXIT_FAILURE );
 }
 
-void solve ( char *filename, int knot_count ) {
+void solve ( char *filename, int knot_count, char *desc ) {
 	FILE * fp;
 	char * line = NULL;
 	size_t len = 0;
@@ -93,10 +93,11 @@ void solve ( char *filename, int knot_count ) {
 		}
 	}
 
-	printf( "Tail history: %d\n", Knot_history_size( &knots[knot_count - 1] ) );
+	printf( "%s: %d\n", desc, Knot_history_size( &knots[knot_count - 1] ) );
 }
 
 int main ( void ) {
-	solve("input.txt", 2);
-	solve("input.txt", 10);
+	char* filename = getenv("ADVENT_INPUT");
+	solve(filename, 2, "PART1");
+	solve(filename, 10, "PART2");
 }

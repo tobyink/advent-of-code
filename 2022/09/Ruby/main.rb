@@ -34,7 +34,7 @@ class Knot
 	end
 end
 
-def solve ( filename, knot_count )
+def solve ( filename, knot_count, desc )
 	knot_count > 1 or die()
 	knots = ( 1 .. knot_count ).map { Knot.new( 0, 0 ) }
 	File.readlines( filename ).each do |line|
@@ -44,8 +44,8 @@ def solve ( filename, knot_count )
 			(1 .. knot_count - 1).each { |ix| knots[ix].follow( knots[ix-1] ) }
 		end
 	end
-	puts "Tail history: #{ knots[knot_count-1].history_size }"
+	puts "#{desc}: #{ knots[knot_count-1].history_size }"
 end
 
-solve( "input.txt", 2 );
-solve( "input.txt", 10 );
+solve( ENV["ADVENT_INPUT"],  2, 'PART1' );
+solve( ENV["ADVENT_INPUT"], 10, 'PART2' );
