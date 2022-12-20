@@ -1,6 +1,8 @@
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 
+static INPUT: &str = env!("ADVENT_INPUT");
+
 #[derive(Clone)]
 struct Range {
     start: usize,
@@ -38,7 +40,7 @@ impl Range {
 }
 
 fn main() {
-    let file = File::open("input.txt").unwrap();
+    let file = File::open(INPUT).unwrap();
     let io = BufReader::new(file);
 
     let pairs: Vec<RangePair> = io
@@ -50,11 +52,11 @@ fn main() {
         .iter()
         .filter(|(elf1, elf2)| elf1.bidi_fully_contains(&elf2))
         .collect();
-    println!("Count of fully contained pairs: {}", fully_contained.len());
+    println!("PART1: {}", fully_contained.len());
 
     let overlapping: Vec<&RangePair> = pairs
         .iter()
         .filter(|(elf1, elf2)| elf1.overlaps(&elf2))
         .collect();
-    println!("Count of overlapping pairs: {}", overlapping.len());
+    println!("PART2: {}", overlapping.len());
 }

@@ -1,0 +1,16 @@
+solutions:
+  C:
+  Raku:
+  Rust:
+env:
+  test:
+    ADVENT_INPUT: input-test.txt
+  real:
+    ADVENT_INPUT: input.txt
+expect:
+  test:
+    PART1: 2
+    PART2: 4
+  real:
+    PART1: 471
+    PART2: 888

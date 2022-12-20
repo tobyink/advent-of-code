@@ -36,7 +36,7 @@ class RangePair {
 }
 
 multi sub MAIN () {
-	MAIN( "input.txt" );
+	MAIN( %*ENV{'ADVENT_INPUT'} );
 }
 
 multi sub MAIN ($filename) {
@@ -53,6 +53,6 @@ multi sub MAIN ($filename) {
 			++$count_overlapping;
 		}
 	}
-	printf( "Count of fully contained pairs: %d\n", $count_contained );
-	printf( "Count of overlapping pairs: %d\n", $count_overlapping );
+	printf( "PART1: %d\n", $count_contained );
+	printf( "PART2: %d\n", $count_overlapping );
 }

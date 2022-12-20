@@ -1,8 +1,5 @@
 .PHONY: all
-all: deps run
-
-.PHONY: deps
-deps:
+all: run
 
 .PHONY: clean
 clean:

@@ -6,4 +6,4 @@ clean:
 
 .PHONY: run
 run:
-	perl -Ilib bin/main.pl
+	raku main.raku

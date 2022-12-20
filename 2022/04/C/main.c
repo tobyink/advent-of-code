@@ -48,7 +48,8 @@ int main ( void ) {
 	size_t len = 0;
 	ssize_t read;
 
-	fp = fopen( "input.txt", "r" );
+	const char* filename = getenv("ADVENT_INPUT");
+	fp = fopen( filename, "r" );
 	if ( fp == NULL )
 		exit( EXIT_FAILURE );
 
@@ -67,8 +68,8 @@ int main ( void ) {
 		}
 	}
 
-	printf( "Count of fully contained pairs: %d\n", count_contained );
-	printf( "Count of overlapping pairs: %d\n", count_overlapping );
+	printf( "PART1: %d\n", count_contained );
+	printf( "PART2: %d\n", count_overlapping );
 
 	fclose( fp );
 	free( line );
