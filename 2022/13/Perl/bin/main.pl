@@ -1,7 +1,7 @@
 #!perl
 use v5.16;
 use List::Util qw( product );
-use constant FILENAME => 'input.txt';
+use constant FILENAME => $ENV{ADVENT_INPUT};
 
 sub packet_cmp ($$) {
 	return $_[0] <=> $_[1] unless grep ref, @_;
@@ -20,14 +20,14 @@ PART_1: {
 		my ( $a, $b ) = map eval scalar <$fh>, 1 .. 3;
 		$total += $count unless packet_cmp( $a, $b ) > 0;
 	}
-	say "Index total: $total";
+	say "PART1: $total";
 }
 
 PART_2: {
 	open my $fh, '<', FILENAME or die;
 	my @markers = ( [[2]], [[6]] );
 	my @all = sort packet_cmp @markers, map eval, <$fh>;
-	say "Decoder key: ", product grep {
+	say "PART2: ", product grep {
 		$all[$_-1] == $markers[0] or $all[$_-1] == $markers[1]
 	} 1 .. @all;
 }

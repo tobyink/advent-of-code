@@ -23,7 +23,7 @@ function my_cmp ( $x, $y ) {
 	}
 }
 
-$filename = 'input.txt';
+$filename = getenv( 'ADVENT_INPUT' );
 
 PART_1: {
 	list ( $i, $total ) = [ 0, 0 ];
@@ -36,7 +36,7 @@ PART_1: {
 		if ( my_cmp( $first, $second ) >= 0 )
 			$total += $i;
 	}
-	echo "Index total: $total\n";
+	echo "PART1: $total\n";
 }
 
 PART_2: {
@@ -56,5 +56,5 @@ PART_2: {
 		$json = json_encode( $line );
 		if ( $json === '[[2]]' or $json === '[[6]]' ) $indices []= 1 + $ix;
 	}
-	echo "Decoder key: " . ( $indices[0] * $indices[1] ) . "\n";
+	echo "PART2: " . ( $indices[0] * $indices[1] ) . "\n";
 }
