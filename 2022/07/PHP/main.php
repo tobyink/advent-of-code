@@ -164,7 +164,7 @@ class DeviceFS {
 	}
 }
 
-$fs = DeviceFS::fromScript( "input.txt" );
+$fs = DeviceFS::fromScript( getenv( 'ADVENT_INPUT' ) );
 $all_dirs = $fs->root->allDirs();
 
 $small_dirs = array_filter( $all_dirs, function ( $d ) {
@@ -180,7 +180,7 @@ foreach ( $small_dirs as $d ) {
 	echo $d->display() . "\n";
 	$small_total += $d->totalSize();
 }
-echo "Total of small dirs: $small_total\n";
+echo "PART1: $small_total\n";
 echo "\n";
 
 echo "================\n";
@@ -209,3 +209,4 @@ foreach ( $big_dirs as $d ) {
 }
 echo "\n";
 echo "Delete: " . $big_dirs[0]->prettyPath() . "\n";
+echo "PART2: " . $big_dirs[0]->totalSize() . "\n";

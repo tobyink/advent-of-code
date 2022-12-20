@@ -1,0 +1,15 @@
+solutions:
+  Rust:
+  Rust2:
+env:
+  test:
+    ADVENT_INPUT: input-test.txt
+  real:
+    ADVENT_INPUT: input.txt
+expect:
+  test:
+    PART1: 21
+    PART2: 8
+  real:
+    PART1: 1776
+    PART2: 234416

@@ -1,6 +1,8 @@
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 
+static INPUT: &str = env!("ADVENT_INPUT");
+
 #[derive(Debug)]
 struct Tree {
     height: i32,
@@ -183,7 +185,7 @@ impl TreeGrid {
 }
 
 pub fn main() {
-    let grid = TreeGrid::read_from_file("input.txt");
-    println!("Visible trees: {}", grid.visible_count());
-    println!("Max scenic score: {}", grid.max_scenic_score());
+    let grid = TreeGrid::read_from_file(INPUT);
+    println!("PART1: {}", grid.visible_count());
+    println!("PART2: {}", grid.max_scenic_score());
 }

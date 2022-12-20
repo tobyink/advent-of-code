@@ -188,7 +188,7 @@ class Solution {
 	}
 
 	public static void main ( String[] args ) {
-		DeviceFS fs = DeviceFS.fromScript( "input.txt" );
+		DeviceFS fs = DeviceFS.fromScript( System.getenv("ADVENT_INPUT") );
 		LinkedList<DeviceDir> all_dirs = fs.root.allDirs();
 
 		LinkedList<DeviceDir> small_dirs = new LinkedList<DeviceDir>();
@@ -210,7 +210,7 @@ class Solution {
 			System.out.print( d.display() + "\n" );
 			small_total += d.totalSize();
 		}
-		System.out.print( "Total of small dirs: " + small_total + "\n" );
+		System.out.print( "PART1: " + small_total + "\n" );
 		System.out.print( "\n" );
 
 		System.out.print( "================\n" );
@@ -246,5 +246,6 @@ class Solution {
 		System.out.print( "\n" );
 
 		System.out.print( "Delete: " + big_dirs.getFirst().prettyPath() + "\n" );
+		System.out.print( "PART2: " + big_dirs.getFirst().totalSize() + "\n" );
 	}
 }

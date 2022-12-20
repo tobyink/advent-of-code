@@ -1,0 +1,16 @@
+solutions:
+  Perl:
+  Java:
+  PHP:
+env:
+  test:
+    ADVENT_INPUT: input-test.txt
+  real:
+    ADVENT_INPUT: input.txt
+expect:
+  test:
+    PART1: 95437
+    PART2: 24933642
+  real:
+    PART1: 1501149
+    PART2: 10096985

@@ -3,6 +3,8 @@ use std::fs::File;
 use std::io::{BufRead, BufReader};
 use std::slice::Iter;
 
+static INPUT: &str = env!("ADVENT_INPUT");
+
 type Position = (usize, usize);
 
 #[derive(Clone, Copy)]
@@ -121,7 +123,7 @@ impl TreeGrid {
 }
 
 pub fn main() {
-    let grid = TreeGrid::read_from_file("input.txt");
-    println!("Visible trees: {}", grid.visible_count());
-    println!("Max scenic score: {}", grid.max_scenic_score());
+    let grid = TreeGrid::read_from_file(INPUT);
+    println!("PART1: {}", grid.visible_count());
+    println!("PART2: {}", grid.max_scenic_score());
 }
