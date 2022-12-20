@@ -37,10 +37,11 @@ sub get_config ( $year, $day ) {
 	return LoadFile( path_to_day( $year, $day )->child( "day.yml" ) );
 }
 
-sub run_solution ( $year, $day, $solution, $env = DATASET ) {
+sub run_solution ( $year, $day, $solution ) {
+	my $env = DATASET;
 	my $config = get_config( $year, $day );
 
-	my $name = "$year/$day/$solution ($env)";
+	my $name = "$year/$day/$solution";
 	if ( $config->{solutions}{$solution}{slow} and not $ENV{ADVENT_SLOW} ) {
 		print colored( [ "magenta" ], "$name - skipped (slow)" ), "\n";
 		return;
@@ -72,45 +73,47 @@ sub run_solution ( $year, $day, $solution, $env = DATASET ) {
 	return $results;
 }
 
-sub run_day ( $year, $day, $env = DATASET ) {
+sub run_day ( $year, $day ) {
 	my $config = eval { get_config( $year, $day ) }
 		or return;
 	map {
-		run_solution( $year, $day, $_, $env )
+		run_solution( $year, $day, $_ )
 	} sort keys %{ $config->{solutions} or die };
 }
 
-sub run_year ( $year, $env = DATASET ) {
+sub run_year ( $year ) {
 	my $y = path_to_year( $year );
 	my @days = sort map $_->basename, grep /(\d+)/, $y->children;
-	map { run_day( $year, $_, $env ) } @days;
+	map { run_day( $year, $_ ) } @days;
 }
 
-sub run_all ( $env = DATASET ) {
+sub run_all () {
 	(
-		run_year( '2022', $env ),
+		run_year( '2022' ),
 	);
 }
 
 sub run_cli ( @argv ) {
 
-	my ( $YYYY, $DD, $SOLUTION ) = @argv;
+	my ( $YYYY, $DD, $SOLUTION ) = map { split q{/} } @argv;
 	my @results;
 
-	if ( defined $SOLUTION ) {
+	if ( $SOLUTION ) {
 		@results = run_solution( $YYYY, $DD, $SOLUTION );
 	}
-	elsif ( defined $DD ) {
+	elsif ( $DD ) {
 		@results = run_day( $YYYY, $DD );
 	}
-	elsif ( defined $YYYY ) {
+	elsif ( $YYYY ) {
 		@results = run_year( $YYYY );
 	}
 	else {
 		@results = run_all();
 	}
-
 	print "\n";
+	
+	print colored( [ "bold cyan" ], "ADVENT_DATASET=" . DATASET ), "\n\n";
+	
 	my $fails = 0;
 	for my $result ( @results ) {
 		my $name = delete $result->{NAME};
@@ -120,7 +123,7 @@ sub run_cli ( @argv ) {
 			colored( $result->{$_} ? ["green"] : ["red"], $_ )
 		} @keys;
 		printf(
-			"%-48s  %s\n",
+			"%-40s  %s\n",
 			colored( [ "bold white" ], "$name:" ),
 			$joined,
 		);

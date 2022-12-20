@@ -14,7 +14,7 @@ function find_marker ( &$buffer, $marker_size ) {
 	return FALSE;
 }
 
-$input = file_get_contents( "input.txt" );
+$input = file_get_contents( getenv( 'ADVENT_INPUT' ) );
 
-echo 'Start of packet:  ' . find_marker( $input, 4 ) . "\n";
-echo 'Start of message: ' . find_marker( $input, 14 ) . "\n";
+echo 'PART1: ' . find_marker( $input, 4 ) . "\n";
+echo 'PART2: ' . find_marker( $input, 14 ) . "\n";

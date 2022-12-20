@@ -1,0 +1,19 @@
+solutions:
+  Perl:
+  Perl2:
+  Javascript:
+  Python:
+  PHP:
+  Rust:
+env:
+  test:
+    ADVENT_INPUT: input-test.txt
+  real:
+    ADVENT_INPUT: input.txt
+expect:
+  test:
+    PART1: 7
+    PART2: 19
+  real:
+    PART1: 1655
+    PART2: 2665

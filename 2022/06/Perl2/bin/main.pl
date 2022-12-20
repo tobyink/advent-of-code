@@ -9,6 +9,6 @@ sub find_marker ( $buffer, $marker_size ) {
 	return -1;
 }
 
-my $input = do { ( @ARGV, $/ ) = 'input.txt'; <> };
-printf "Start of packet:  %d\n", find_marker( $input, 4 );
-printf "Start of message: %d\n", find_marker( $input, 14 );
+my $input = do { ( @ARGV, $/ ) = $ENV{ADVENT_INPUT}; <> };
+printf "PART1: %d\n", find_marker( $input, 4 );
+printf "PART2: %d\n", find_marker( $input, 14 );

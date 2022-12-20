@@ -1,10 +1,10 @@
-require( 'fs' ).readFile( 'input.txt', 'utf8', ( err, input ) => {
+require( 'fs' ).readFile( process.env.ADVENT_INPUT, 'utf8', ( err, input ) => {
 	if ( err ) {
 		console.error( err );
 		return;
 	}
-	console.log( `Start of packet:  ${ find_marker( input, 4 ) }` );
-	console.log( `Start of message: ${ find_marker( input, 14 ) }` );
+	console.log( `PART1: ${ find_marker( input, 4 ) }` );
+	console.log( `PART2: ${ find_marker( input, 14 ) }` );
 } );
 
 function find_marker( buffer, marker_size ) {

@@ -1,10 +1,12 @@
 use std::fs;
 use std::collections::HashMap;
 
+static INPUT: &str = env!("ADVENT_INPUT");
+
 fn main() {
-    let input = fs::read_to_string("input.txt").unwrap();
-    println!("Start of packet:  {}", find_marker(&input, 4).unwrap());
-    println!("Start of message: {}", find_marker(&input, 14).unwrap());
+    let input = fs::read_to_string(INPUT).unwrap();
+    println!("PART1: {}", find_marker(&input, 4).unwrap());
+    println!("PART2: {}", find_marker(&input, 14).unwrap());
 }
 
 fn find_marker(buffer: &str, marker_size: usize) -> Option<usize> {
