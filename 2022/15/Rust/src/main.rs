@@ -1,22 +1,9 @@
 use std::collections::HashMap;
+use std::env;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 
-/*
-const FILENAME: &str = "input-test.txt";
-const PART_ONE_Y: i64 = 10;
-const PART_ONE_LBOUND: i64 = -100;
-const PART_ONE_UBOUND: i64 = 100;
-const PART_TWO_LBOUND: i64 = 0;
-const PART_TWO_UBOUND: i64 = 20;
-*/
-
-const FILENAME: &str = "input.txt";
-const PART_ONE_Y: i64 = 2_000_000;
-const PART_ONE_LBOUND: i64 = -2_000_000;
-const PART_ONE_UBOUND: i64 = 6_000_000;
-const PART_TWO_LBOUND: i64 = 0;
-const PART_TWO_UBOUND: i64 = 4_000_000;
+const FILENAME: &str = env!("ADVENT_INPUT");
 
 #[derive(Debug, Hash, Eq, PartialEq, Clone, Copy)]
 struct Point {
@@ -126,9 +113,11 @@ pub fn part1() {
     let sensors = Sensor::list_from_file(FILENAME);
     let beacons = Sensor::extract_beacons(&sensors);
 
-    let y = PART_ONE_Y;
+    let y = env::var("ADVENT_PART_ONE_Y").unwrap().parse::<i64>().unwrap();
+    let lbound = env::var("ADVENT_PART_ONE_LBOUND").unwrap().parse::<i64>().unwrap();
+    let ubound = env::var("ADVENT_PART_ONE_UBOUND").unwrap().parse::<i64>().unwrap();
     let mut count = 0;
-    for x in PART_ONE_LBOUND..=PART_ONE_UBOUND {
+    for x in lbound..=ubound {
         let position = Point::new(x, y);
         if sensors.iter().any(|s| s.within_beacon_distance(&position)) {
             count += 1
@@ -138,18 +127,21 @@ pub fn part1() {
         }
     }
 
-    println!("Positions that cannot contain a beacon on y={y}: {count}");
+    println!("PART1: {count}");
 }
 
 pub fn part2() {
     let sensors = Sensor::list_from_file(FILENAME);
 
+    let lbound = env::var("ADVENT_PART_TWO_LBOUND").unwrap().parse::<i64>().unwrap();
+    let ubound = env::var("ADVENT_PART_TWO_UBOUND").unwrap().parse::<i64>().unwrap();
+
     for s in &sensors {
         for p in s.border_points() {
-            if p.x < PART_TWO_LBOUND
-                || p.y < PART_TWO_LBOUND
-                || p.x > PART_TWO_UBOUND
-                || p.y > PART_TWO_UBOUND
+            if p.x < lbound
+                || p.y < lbound
+                || p.x > ubound
+                || p.y > ubound
             {
                 continue;
             }
@@ -157,7 +149,7 @@ pub fn part2() {
                 continue;
             }
 
-            println!("Tuning frequency: {}", (p.x * 4_000_000) + p.y);
+            println!("PART2: {}", (p.x * 4_000_000) + p.y);
             return;
         }
     }
