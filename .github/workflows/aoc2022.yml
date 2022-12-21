@@ -1,4 +1,4 @@
-name: AoC 2022
+name: AOC2022
 on: [push]
 jobs:
   Tests:
