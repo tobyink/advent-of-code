@@ -7,7 +7,7 @@ use std::io::{BufRead, BufReader};
 const FILENAME: &str = env!("ADVENT_INPUT");
 
 const ROOT_MONKEY: &str = "root";
-const HUMAN: &str = "human";
+const HUMAN: &str = "humn";
 
 type MonkeyNumber = i128;
 type MonkeyName = String;
