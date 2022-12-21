@@ -1,0 +1,18 @@
+solutions:
+  Rust:
+env:
+  test:
+    ADVENT_INPUT: input-test.txt
+    ADVENT_MONKEY: root
+    ADVENT_HUMAN: humn
+  real:
+    ADVENT_INPUT: input.txt
+    ADVENT_MONKEY: root
+    ADVENT_HUMAN: humn
+expect:
+  test:
+    PART1: 152
+    PART2: 301
+  real:
+    PART1: 83056452926300
+    PART2: 3469704905529
