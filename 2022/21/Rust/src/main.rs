@@ -5,8 +5,9 @@ use std::fs::File;
 use std::io::{BufRead, BufReader};
 
 const FILENAME: &str = env!("ADVENT_INPUT");
-const ROOT_MONKEY: &str = env!("ADVENT_MONKEY");
-const HUMAN: &str = env!("ADVENT_HUMAN");
+
+const ROOT_MONKEY: &str = "root";
+const HUMAN: &str = "human";
 
 type MonkeyNumber = i128;
 type MonkeyName = String;
