@@ -1,0 +1,16 @@
+solutions:
+  Javascript:
+env:
+  test:
+    ADVENT_INPUT: input-test.txt
+    ADVENT_RANDOM_SHAPE: ABBBBFF
+  real:
+    ADVENT_INPUT: input.txt
+    ADVENT_RANDOM_SHAPE: GFAAHHF
+expect:
+  test:
+    PART1: 3068
+    PART2: 1514285714288
+  real:
+    PART1: 3130
+    PART2: 1556521739139

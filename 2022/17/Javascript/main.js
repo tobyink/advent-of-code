@@ -1,5 +1,6 @@
 const fs = require( 'fs' );
-const FILENAME = 'input.txt';
+const FILENAME = process.env.ADVENT_INPUT;
+const RANDOM_SHAPE = process.env.ADVENT_RANDOM_SHAPE;
 const WIDTH = 7;
 
 class Shape {
@@ -423,13 +424,13 @@ fs.readFile( FILENAME, 'utf8', ( err, input ) => {
 		console.error( err );
 		return;
 	}
-	return;
+
 	let g = new Grid( WIDTH, input.trim() );
 	for ( var i = 0; i < 2022; i++ ) {
 		g.drop();
 	}
 	console.log( g.display() );
-	console.log( "Height is: " + g.rock_level() );
+	console.log( "PART1: " + g.rock_level() );
 } );
 
 // Part 2
@@ -445,8 +446,8 @@ fs.readFile( FILENAME, 'utf8', ( err, input ) => {
 	var last_height, height_diff, last_cycle, cycle_diff;
 	for ( var i = 0; i < 10_000; i++ ) {
 		g.drop();
-		// Random shapes which are known to occur in test input and real input
-		if ( g.surface_shape() == "ABBBBFF" || g.surface_shape() == "GFAAHHF" ) {
+		// Random shape which is known to occur in input
+		if ( g.surface_shape() == RANDOM_SHAPE ) {
 			let h = g.rock_level();
 			if ( last_height ) {
 				height_diff = h - last_height;
@@ -465,5 +466,6 @@ fs.readFile( FILENAME, 'utf8', ( err, input ) => {
 	for ( var i = 0; i < reduced; i++ ) {
 		g2.drop();
 	}
-	console.log( g2.rock_level() + ( plus_cycles * height_diff ) );
+	let answer = g2.rock_level() + ( plus_cycles * height_diff );
+	console.log( "PART2: " + answer );
 } );
