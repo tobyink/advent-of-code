@@ -3,7 +3,7 @@
 use v5.24;
 use warnings;
 use constant {
-	FILENAME => 'input-test.txt',
+	FILENAME => $ENV{ADVENT_INPUT},
 	DEBUG    => !!0,
 	PART_ONE => !!1,
 	PART_TWO => !!1,
@@ -164,6 +164,7 @@ if ( PART_ONE ) {
 	}
 	say "Part 1 best flow was $best_flow using path @$best_path";
 	say "Searched $count possibilities.";
+	say "PART1: $best_flow";
 }
 
 if ( PART_TWO ) {
@@ -198,4 +199,5 @@ if ( PART_TWO ) {
 	}
 	say "Part 2 best flow was $best_flow using path @$best_path and @$best_path2";
 	say "Searched $count possibilities. (Only $real_count were seriously considered.)";
+	say "PART2: $best_flow";
 }

@@ -1,5 +1,7 @@
 solutions:
   Perl:
+    slow:
+      real: true
   Rust:
 env:
   test:

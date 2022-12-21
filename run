@@ -42,7 +42,7 @@ sub run_solution ( $year, $day, $solution ) {
 	my $config = get_config( $year, $day );
 
 	my $name = "$year/$day/$solution";
-	if ( $config->{solutions}{$solution}{slow} and not $ENV{ADVENT_SLOW} ) {
+	if ( $config->{solutions}{$solution}{slow}{$env} and not $ENV{ADVENT_SLOW} ) {
 		print colored( [ "magenta" ], "$name - skipped (slow)" ), "\n";
 		return;
 	}

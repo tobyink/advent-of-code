@@ -1,0 +1,2 @@
+requires 'match::simple';
+requires 'match::simple::XS';
