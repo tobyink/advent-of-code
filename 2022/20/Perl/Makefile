@@ -1,8 +1,12 @@
 .PHONY: all
-all: run
+all: test run
 
 .PHONY: clean
 clean:
+
+.PHONY: test
+test:
+	prove -lrv t
 
 .PHONY: run
 run:
