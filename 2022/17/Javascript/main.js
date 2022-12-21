@@ -429,7 +429,7 @@ fs.readFile( FILENAME, 'utf8', ( err, input ) => {
 	for ( var i = 0; i < 2022; i++ ) {
 		g.drop();
 	}
-	console.log( g.display() );
+	// console.log( g.display() );
 	console.log( "PART1: " + g.rock_level() );
 } );
 
@@ -452,7 +452,7 @@ fs.readFile( FILENAME, 'utf8', ( err, input ) => {
 			if ( last_height ) {
 				height_diff = h - last_height;
 				cycle_diff  = i - last_cycle;
-				console.log( `At drop ${i} the height is ${h}, which is ${height_diff} taller` );
+				// console.log( `At drop ${i} the height is ${h}, which is ${height_diff} taller` );
 			}
 			last_cycle = i;
 			last_height = h;
