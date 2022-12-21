@@ -1,5 +1,6 @@
 solutions:
   Perl:
+  Rust:
 env:
   test:
     ADVENT_INPUT: input-test.txt

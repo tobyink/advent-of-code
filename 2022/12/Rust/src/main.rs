@@ -1,6 +1,8 @@
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 
+static INPUT: &str = env!("ADVENT_INPUT");
+
 struct Square {
     letter: char,
     height: u32,
@@ -133,6 +135,6 @@ impl Map {
 }
 
 pub fn main() {
-    Map::load("Part 1", "input.txt", vec!['S'], vec!['E']).run_simulation();
-    Map::load("Part 2", "input.txt", vec!['S', 'a'], vec!['E']).run_simulation();
+    Map::load("PART1", INPUT, vec!['S'], vec!['E']).run_simulation();
+    Map::load("PART2", INPUT, vec!['S', 'a'], vec!['E']).run_simulation();
 }
