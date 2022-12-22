@@ -2,7 +2,6 @@
 use v5.24;
 use warnings;
 use experimental qw( signatures );
-use Data::Dumper;
 use constant FILENAME => $ENV{ADVENT_INPUT};
 
 use constant {
@@ -188,8 +187,7 @@ sub part2_pace_calc ( $map, $position ) {
 		return @naive;
 	}
 
-	defined CUBE_TRANSITIONS->{$current_face.$facing}
-		or die( Dumper( $current_face, $facing ) );
+	defined CUBE_TRANSITIONS->{$current_face.$facing} or die;
 
 	# Figure out rotation and proper next face!
 	my $rotation;
