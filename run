@@ -50,6 +50,7 @@ sub run_solution ( $year, $day, $solution ) {
 
 	my %env = %{ $config->{env}{$env} or die };
 	$env{ADVENT_INPUT} = path_to_day( $year, $day )->child( $env{ADVENT_INPUT} )->absolute;
+	$env{ADVENT_DATASET} = $env;
 	%ENV = ( %ENV, %env );
 
 	my ( $stdout, $stderr ) = tee {
