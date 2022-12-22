@@ -1,0 +1,14 @@
+solutions:
+  Perl:
+env:
+  test:
+    ADVENT_INPUT: input-test.txt
+  real:
+    ADVENT_INPUT: input.txt
+expect:
+  test:
+    PART1: 6032
+    PART2: 5031
+  real:
+    PART1: 131052
+    PART2: 4578
