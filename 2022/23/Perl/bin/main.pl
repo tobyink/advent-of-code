@@ -3,7 +3,6 @@ use v5.24;
 use warnings;
 use experimental qw( signatures );
 use constant FILENAME => $ENV{ADVENT_INPUT};
-use constant DEBUG => 0;
 
 use constant {
 	NORTH  => 0,
@@ -81,7 +80,6 @@ sub grid_needs_expansion ( $grid ) {
 
 sub expand_grid ( $grid ) {
 	my $expand_by = 2;
-	say "Expand grid by $expand_by." if DEBUG;
 	my $height = scalar( $grid->@* );
 	my $width = scalar( $grid->[0]->@* );
 	my $new_width = $width + $expand_by + $expand_by;
@@ -125,7 +123,6 @@ sub consider_moves ( $grid, $elves, $count ) {
 
 		my $elf_row = $elf->[ELF_ROW];
 		my $elf_col = $elf->[ELF_COL];
-		say "Thinking about elf at $elf_row, $elf_col:" if DEBUG;
 		my $has_nearby_elf = 0;
 
 		SURROUNDING: for my $s ( $surroundings->@* ) {
@@ -142,13 +139,10 @@ sub consider_moves ( $grid, $elves, $count ) {
 		DIRECTION: for my $cycle ( 0 .. 3 ) {
 			my $direction = ( $count + $cycle ) % 4;
 
-			say "  Thinking about direction $direction..." if DEBUG;
-
 			if ( $direction == NORTH
 			and ! $grid->[$elf_row-1][$elf_col-1][SQ_ELF]
 			and ! $grid->[$elf_row-1][$elf_col+0][SQ_ELF]
 			and ! $grid->[$elf_row-1][$elf_col+1][SQ_ELF] ) {
-				say "    A firm maybe!" if DEBUG;
 				$elf->[ELF_CONSIDERING] = NORTH;
 				push $grid->[$elf_row-1][$elf_col+0][SQ_CONSIDERED_BY]->@*, $elf;
 				last DIRECTION;
@@ -158,7 +152,6 @@ sub consider_moves ( $grid, $elves, $count ) {
 			and ! $grid->[$elf_row+1][$elf_col-1][SQ_ELF]
 			and ! $grid->[$elf_row+1][$elf_col+0][SQ_ELF]
 			and ! $grid->[$elf_row+1][$elf_col+1][SQ_ELF] ) {
-				say "    It's something to consider!" if DEBUG;
 				$elf->[ELF_CONSIDERING] = SOUTH;
 				push $grid->[$elf_row+1][$elf_col+0][SQ_CONSIDERED_BY]->@*, $elf;
 				last DIRECTION;
@@ -168,7 +161,6 @@ sub consider_moves ( $grid, $elves, $count ) {
 			and ! $grid->[$elf_row-1][$elf_col-1][SQ_ELF]
 			and ! $grid->[$elf_row+0][$elf_col-1][SQ_ELF]
 			and ! $grid->[$elf_row+1][$elf_col-1][SQ_ELF] ) {
-				say "    Perhaps!" if DEBUG;
 				$elf->[ELF_CONSIDERING] = WEST;
 				push $grid->[$elf_row+0][$elf_col-1][SQ_CONSIDERED_BY]->@*, $elf;
 				last DIRECTION;
@@ -178,7 +170,6 @@ sub consider_moves ( $grid, $elves, $count ) {
 			and ! $grid->[$elf_row-1][$elf_col+1][SQ_ELF]
 			and ! $grid->[$elf_row+0][$elf_col+1][SQ_ELF]
 			and ! $grid->[$elf_row+1][$elf_col+1][SQ_ELF] ) {
-				say "    A possibility, for sure!" if DEBUG;
 				$elf->[ELF_CONSIDERING] = EAST;
 				push $grid->[$elf_row+0][$elf_col+1][SQ_CONSIDERED_BY]->@*, $elf;
 				last DIRECTION;
@@ -201,14 +192,12 @@ sub make_moves ( $grid, $elves ) {
 			# they should no longer consider it. It should be
 			# considered by no elves!
 			if ( @elves > 1 ) {
-				say "Square $row, $col under consideration by multiple elves. Nobody moved here." if DEBUG;
 				$_->[ELF_CONSIDERING] = undef for @elves;
 				$square->[SQ_CONSIDERED_BY] = [];
 				next;
 			}
 
 			# If one elf considered it, the elf should move!
-			say "Square $row, $col under consideration by one elf. It moves here." if DEBUG;
 			my $elf = shift @elves;
 			my $old_square = $grid->[ $elf->[ELF_ROW] ][ $elf->[ELF_COL] ];
 			undef $old_square->[SQ_ELF];
@@ -267,28 +256,36 @@ sub count_empty ( $grid ) {
 sub part1 () {
 	my ( $grid, $elves ) = read_grid();
 	my $count = 0;
-
-	say "== Initial state ==" if DEBUG;
-	say dump_grid( $grid ) if DEBUG;
-
 	while ( 1 ) {
-		if ( grid_needs_expansion( $grid ) ) {
-			expand_grid( $grid );
-		}
+		expand_grid( $grid ) if grid_needs_expansion( $grid );
 		my $considered_moves = consider_moves( $grid, $elves, $count );
 		make_moves( $grid, $elves );
 		$count++;
-		say "== After round $count ==" if DEBUG;
-		say dump_grid( $grid ) if DEBUG;
 		last if $count == 10;
+	}
+	shrink_grid( $grid );
+	say "== After round $count ==";
+	say dump_grid( $grid );
+	say "PART1: ", count_empty( $grid );
+}
+
+sub part2 () {
+	my ( $grid, $elves ) = read_grid();
+	my $count = 0;
+	while ( 1 ) {
+		expand_grid( $grid ) if grid_needs_expansion( $grid );
+		my $considered_moves = consider_moves( $grid, $elves, $count );
+		make_moves( $grid, $elves );
+		$count++;
+		last if $considered_moves == 0;
 	}
 	shrink_grid( $grid );
 	say "== Final state (after round $count) ==";
 	say dump_grid( $grid );
-
-	say "PART1: ", count_empty( $grid );
+	say "PART2: ", $count;
 }
 
 unless ( caller ) {
 	part1();
+	part2();
 }

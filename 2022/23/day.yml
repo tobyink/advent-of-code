@@ -10,10 +10,10 @@ env:
 expect:
   tiny:
     PART1: 25
-    PART2: unknown
+    PART2: 4
   test:
     PART1: 110
-    PART2: unknown
+    PART2: 20
   real:
-    PART1: unknown
-    PART2: unknown
+    PART1: 4091
+    PART2: 1036
