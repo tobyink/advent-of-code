@@ -1,0 +1,19 @@
+solutions:
+  Perl:
+env:
+  tiny:
+    ADVENT_INPUT: input-tiny.txt
+  test:
+    ADVENT_INPUT: input-test.txt
+  real:
+    ADVENT_INPUT: input.txt
+expect:
+  tiny:
+    PART1: 10
+    PART2: 30
+  test:
+    PART1: 18
+    PART2: 54
+  real:
+    PART1: 266
+    PART2: 853
