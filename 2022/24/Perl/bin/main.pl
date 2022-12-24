@@ -42,11 +42,10 @@ sub part2 () {
 		} );
 	say "Final trip brought us to ", $third_trip->minute, " minutes.";
 
-	say "PART2: ", $third_trip->minute; # 803 too low?
+	say "PART2: ", $third_trip->minute;
 }
 
 unless ( caller ) {
 	part1();
 	part2();
 }
-
