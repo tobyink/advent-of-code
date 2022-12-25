@@ -10,4 +10,4 @@ clean:
 
 .PHONY: run
 run:
-	perl -Ilib bin/main.pl
+	perl -Ilib devel.advent/main.pl
