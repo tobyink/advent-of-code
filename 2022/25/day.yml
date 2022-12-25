@@ -1,0 +1,12 @@
+solutions:
+  Perl:
+env:
+  test:
+    ADVENT_INPUT: input-test.txt
+  real:
+    ADVENT_INPUT: input.txt
+expect:
+  test:
+    PART1: "2=-1=0"
+  real:
+    PART1: "2-1=10=1=1==2-1=-221"
