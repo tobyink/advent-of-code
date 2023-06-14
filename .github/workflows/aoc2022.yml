@@ -6,6 +6,7 @@ jobs:
     steps:
       - name: Install system prereqs
         run: |
+          sudo apt-get update
           sudo apt install ruby 
           sudo apt install python3
           sudo apt install php8.1
