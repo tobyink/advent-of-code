@@ -10,7 +10,7 @@ and ones I'm still learning (like Rust and Raku).
 
 ## Goals
 
-- [ ] solve every day
+- [x] solve every day
 - [x] at least 8 days solved in Rust 2021
 - [x] at least 8 days solved in Perl 5
 - [x] at least 4 days solved in Javascript (node)
